@@ -444,3 +444,11 @@ database. Those are deliberate simplifications for a learning project.
   or a waiting period in a real system.
 - The token fallback (when `pyjwt` is missing) is a simple signed
   token, not a standards-compliant JWT. Use `pyjwt` for anything real.
+
+
+## Common mistakes
+
+- Storing passwords in plain text, or with a fast hash like MD5. Use bcrypt with a salt.
+- Making OTPs short-lived in theory but never checking the expiry in code. Always compare the current time with the stored expiry.
+- Accepting a JWT without checking its expiry or signature. An expired or forged token must be rejected.
+- Locking an account forever after failed attempts. Lock it for a while, or require a reset, so a real user is not locked out for good.
